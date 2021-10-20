@@ -1,0 +1,164 @@
+.container {
+  /* display: inline-flex; */
+  display: flex;
+  border: 1px solid red;
+  min-height: 20rem;
+
+  /* PROPERTIES OF THE PARENT OR PROPERTIES OF THE FLEX-CONTAINER*/
+
+  /* ********** JUSTIFY CONTENT => POSITION ELEMENTS ON MAIN AXIS ********** */
+
+  /* justify-content: flex-start; */
+  /* justify-content: flex-end; */
+  /* justify-content: start; */
+  /* justify-content: end; */
+  justify-content: center;
+  /* justify-content: space-between; */
+  /* justify-content: space-around; */
+  /* justify-content: space-evenly; */
+
+  /* ********** ALIGN ITEMS => POSITION ELEMENTS ON  CROSS AXIS ********** */
+
+  /* align-items: flex-start; */
+  /* align-items: flex-end; */
+  /* align-items: center; */
+  /* align-items: stretch; */
+
+  /* ALIGN CONTENT */
+
+  /* ALIGN CONTENT  MODIFIES THE FLEX WRAP AND POSITION ELEMTENTS ON FLEX LINES  */
+  /* align-content: flex-end; */
+
+  /* ********** WRAP ********** */
+
+  /* flex-wrap: nowrap; */
+  /* flex-wrap: wrap-reverse; */
+  /* flex-wrap: wrap; */
+
+  /* ********** DIRECTION  ***********/
+
+  /* flex-direction: row; */
+  /* flex-direction: row-reverse; */
+  /* flex-direction: column; */
+  /* flex-direction: column-reverse; */
+
+  /* ********** FLEX FLOW => Shorthand combination of flex-direction and flex-wrap  ***********/
+
+  /* flex-flow: row wrap; */
+}
+
+.box {
+  height: 100px;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 1px solid blue;
+  width: 150px;
+}
+
+/* .box-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.simple {
+  height: 40px;
+  width: 40px;
+  border: 1px solid purple;
+} */
+
+/* PROPERTIES OF THE FLEX ITEMS */
+
+.box-3 {
+  order: 2;
+  /* flex-grow: 1; */
+  /* Flex-shrink go namaluva elementot dokolku ima potreba od toa */
+  /* flex-shrink: 3;
+  flex-basis: 50px; */
+  /* flex: none OR flexgrow, flexshrink, flex basis */
+  flex: 0 3 50px;
+}
+
+.box-1 {
+  order: 3;
+  /* flex-grow: 1; */
+}
+
+/* ********** HEADING  ********** */
+
+.container-header {
+  display: flex;
+  border: 1px solid red;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-options {
+  /* flex-grow: 2; */
+}
+.options-list {
+  display: flex;
+  flex-direction: row-reverse;
+  border: 1px solid red;
+  list-style: none;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+/* **********  MOBILE FIRST APPROACH, STYLING LAYOUT ********** */
+.wrapper > * {
+  padding: 10px;
+  flex-grow: 1;
+  flex-basis: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.header {
+  background: pink;
+}
+
+.footer {
+  background: magenta;
+}
+
+.main {
+  background: seagreen;
+}
+
+.aside-1 {
+  background: gold;
+}
+
+.aside-2 {
+  background: blue;
+}
+
+@media all and (min-width: 600px) {
+  .aside {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .main {
+    order: 2;
+    flex-basis: 0;
+    flex-grow: 3;
+  }
+  .footer {
+    order: 4;
+  }
+  .aside-2 {
+    order: 3;
+  }
+  .aside-1 {
+    order: 1;
+  }
+}
