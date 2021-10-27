@@ -1,0 +1,20 @@
+// ke prima boja kako argument
+// vo zavisnost od svetlinata na bojata
+// ke pravime darken/lighten
+
+// FUNCTION WITH IF STATEMENT
+
+@function textColor($textColor) {
+  @if (lightness($textColor) > 50) {
+    @return darken($textColor, 60%);
+  } @else {
+    @return lighten($textColor, 45%);
+  }
+}
+
+// MIXINS returns pre-difined styles that can be reused in our stylesheet
+
+@mixin font($fontSize, $fontWeight) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+}

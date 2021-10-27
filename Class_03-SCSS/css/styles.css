@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+header {
+  background-color: #f4f4f4;
+  color: #5b5b5b;
+  padding: 1rem; }
+  header h1 {
+    text-align: center; }
+
+.container {
+  padding: 1rem; }
+  .container div h3 {
+    color: orange; }
+  .container-one {
+    color: #ff7300;
+    background-color: rgba(255, 115, 0, 0.274);
+    font-size: large; }
+    .container-one .button:hover {
+      color: #fff1e6; }
+  .container-two {
+    color: #fa78f6;
+    background-color: powderblue; }
+    .container-two .button:hover {
+      color: #f616ef; }
+  .container .button {
+    cursor: pointer;
+    border: 1px solid black; }
+
+.btns-in, .btns-out {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid grey;
+  display: inline-flex; }
+
+.btns {
+  margin-top: 2rem; }
+  .btns-in {
+    background-color: #b16df5;
+    font-size: 20px;
+    font-weight: bold; }
+    .btns-in:hover {
+      background-color: #7e10ec; }
+  .btns-out {
+    background-color: #6df5ee;
+    font-size: 14px;
+    font-weight: bolder; }
+    .btns-out:hover {
+      background-color: #0dbcb3; }
+
+.main__box {
+  height: 40px;
+  width: 40px;
+  border: 2px solid black;
+  margin-top: 20px; }
+  .main__box:nth-child(1) {
+    background-color: #930a0a;
+    height: 50px;
+    width: 50px; }
+    .main__box:nth-child(1):hover {
+      background-color: #7b0808; }
+  .main__box:nth-child(2) {
+    background-color: #930a0a;
+    height: 50px;
+    width: 50px; }
+    .main__box:nth-child(2):hover {
+      background-color: #7b0808; }
+  .main__box:nth-child(3) {
+    background-color: #df6e01;
+    height: 50px;
+    width: 50px; }
+    .main__box:nth-child(3):hover {
+      background-color: #c66101; }
+  .main__box:nth-child(4) {
+    background-color: #dfb101;
+    height: 50px;
+    width: 50px; }
+    .main__box:nth-child(4):hover {
+      background-color: #c69d01; }
+  .main__box:nth-child(5) {
+    background-color: #facf21;
+    height: 50px;
+    width: 50px; }
+    .main__box:nth-child(5):hover {
+      background-color: #f9ca08; }

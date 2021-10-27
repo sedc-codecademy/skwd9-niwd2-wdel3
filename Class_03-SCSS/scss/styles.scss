@@ -1,0 +1,139 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// $primary-color: grey;
+
+@import "variables";
+@import "functions";
+// HEADER
+header {
+  background-color: $primary-color-3;
+  color: textColor($primary-color-3);
+  padding: 1rem;
+  h1 {
+    text-align: center;
+  }
+}
+
+.container {
+  padding: 1rem;
+  div {
+    h3 {
+      color: orange;
+    }
+  }
+
+  &-one {
+    color: $primary-color-1;
+    background-color: rgba(255, 115, 0, 0.274);
+    font-size: large;
+    .button {
+      &:hover {
+        color: textColor($primary-color-1);
+      }
+    }
+  }
+
+  &-two {
+    color: rgb(250, 120, 246);
+    background-color: powderblue;
+    .button {
+      &:hover {
+        color: darken(rgb(250, 120, 246), 20%);
+      }
+    }
+  }
+
+  .button {
+    cursor: $primary-pointer;
+    border: 1px solid black;
+  }
+}
+
+// BTNS GLOBAL
+
+//% Ovoj znak e za shared style koishto mozhe da se nasledi (extend)
+
+%button-global {
+  cursor: $primary-pointer;
+  padding: 0.5rem;
+  border: 1px solid $primary-color;
+  display: inline-flex;
+}
+
+.btns {
+  margin-top: 2rem;
+
+  &-in {
+    @extend %button-global;
+    background-color: $primary-color-2;
+    // padding: 2rem; Go prebrisuva nasledenoto
+    &:hover {
+      background-color: darken($primary-color-2, 20%);
+    }
+    @include font(20px, bold);
+  }
+  &-out {
+    @extend %button-global;
+    background-color: rgb(109, 245, 238);
+    // padding: 2rem; Go prebrisuva nasledenoto
+    &:hover {
+      background-color: darken(rgb(109, 245, 238), 30%);
+    }
+
+    @include font(14px, bolder);
+  }
+}
+
+.main {
+  &__box {
+    height: 40px;
+    width: 40px;
+    border: 2px solid black;
+    margin-top: 20px;
+
+    @for $index from 1 through length($bgColorList) {
+      $bgColor: nth($bgColorList, $index);
+
+      &:nth-child(#{$index}) {
+        background-color: $bgColor;
+        height: 50px;
+        width: 50px;
+
+        &:hover {
+          background-color: darken($bgColor, 5%);
+        }
+      }
+    }
+
+    // &:nth-child(1) {
+    //   background-color: #930a0a;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+    // &:nth-child(2) {
+    //   background-color: #df2a01;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+    // &:nth-child(3) {
+    //   background-color: #df6e01;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+    // &:nth-child(4) {
+    //   background-color: #dfb101;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+    // &:nth-child(5) {
+    //   background-color: #facf21;
+    //   height: 40px;
+    //   width: 40px;
+    // }
+  }
+}
