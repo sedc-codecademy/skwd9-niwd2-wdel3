@@ -87,3 +87,10 @@ header {
     width: 50px; }
     .main__box:nth-child(5):hover {
       background-color: #f9ca08; }
+
+.form {
+  padding: 2rem; }
+  .form__fname--label {
+    color: red; }
+  .form__fname--input {
+    background-color: pink; }

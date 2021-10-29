@@ -137,3 +137,17 @@ header {
     // }
   }
 }
+
+// BEM  BLOCK__ELEMENT--MODIFIER
+
+.form {
+  padding: 2rem;
+  &__fname {
+    &--label {
+      color: red;
+    }
+    &--input {
+      background-color: pink;
+    }
+  }
+}

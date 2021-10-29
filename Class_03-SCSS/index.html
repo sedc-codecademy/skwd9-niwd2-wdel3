@@ -52,6 +52,29 @@
       <div class="main__box">Box 5</div>
     </div>
 
-    <!-- BLOCK ELEMENT MODIFIER => BEM -->
+    <!-- BLOCK__ELEMENT--MODIFIER => BEM -->
+    <form class="form">
+      <div class="form__fname">
+        <label class="form__fname--label label-unique" for="fname"
+          >First name:</label
+        >
+        <input class="form__fname--input" name="fname" />
+        <span class="form__fname--errMsg">Error msg</span>
+      </div>
+
+      <div class="form__lname">
+        <label class="form__lname--label label-unique" for="lname"
+          >Last name:</label
+        >
+        <input class="form__lname--input" name="lname" />
+      </div>
+
+      <div class="form__pname">
+        <label class="form__pname--label label-unique" for="pname"
+          >Pet name:</label
+        >
+        <input class="form__pname--input" name="pname" />
+      </div>
+    </form>
   </body>
 </html>
