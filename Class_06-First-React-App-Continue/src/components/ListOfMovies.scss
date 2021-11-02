@@ -1,0 +1,9 @@
+.movies {
+  display: flex;
+  border: 1px solid red;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  justify-content: space-evenly;
+}

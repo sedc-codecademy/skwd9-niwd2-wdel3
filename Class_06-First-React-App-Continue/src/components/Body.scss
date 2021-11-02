@@ -1,0 +1,18 @@
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 3rem;
+
+  &__movie {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(128, 0, 128, 0.466);
+  }
+}
+
+.movies {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

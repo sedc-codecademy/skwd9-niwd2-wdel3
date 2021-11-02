@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(134, 30, 30, 0.493);
+  h1 {
+    cursor: pointer;
+    color: rgba(134, 30, 30, 0.733);
+    &:hover {
+      color: lighten(red, 20%);
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      margin-right: 1rem;
+      cursor: pointer;
+      &:hover {
+        color: lighten(black, 40%);
+      }
+    }
+  }
+}
