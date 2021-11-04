@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuid } from "uuid"; // Library to generate UNIQUE IDS for us
 // V1 Generates and timestamp
 
-import Movie from "./BigMovie";
+import Movie from "./Movie";
 import "./Body.scss";
 
 class Body extends Component {
@@ -27,10 +27,12 @@ class Body extends Component {
         },
       ],
 
+      // FIRST APPROACH
       name: "",
       releaseDate: "",
       director: "",
 
+      // SECOND APPROACH
       newMovieToBeAdded: {
         id: "",
         name: "",
@@ -66,7 +68,7 @@ class Body extends Component {
   handleMovieName = (e) => {
     this.setState({
       newMovieToBeAdded: {
-        ...this.state.newMovieToBeAdded,
+        ...this.state.newMovieToBeAdded, //gi zimame site vrednost koishto bile vo ovoj objekt
         name: e.target.value,
       },
     });
@@ -130,7 +132,7 @@ class Body extends Component {
         mainMovies: [...this.state.mainMovies, movieToAdd],
       });
     } else {
-      //
+      //OVDE SE MOVIES KOISHTO GI EDITIRAME
       const movieToEdit = this.state.mainMovies.map((movie) => {
         if (movie.editable) {
           movie = { ...this.state.newMovieToBeAdded, editable: false };
@@ -161,7 +163,7 @@ class Body extends Component {
     });
   };
 
-  handleMovieToBeEdit = (id, name, releaseDate, director) => {
+  handleMovieToBeEdited = (id, name, releaseDate, director) => {
     const movieToEdit = this.state.mainMovies.map((movie) => {
       if (movie.id === id) {
         movie = { ...movie, editable: true };
@@ -204,7 +206,7 @@ class Body extends Component {
                   director={movie.director}
                   removeMovie={this.handleRemoveMovie}
                   //Good practice
-                  handleMovieToBeEdit={this.handleMovieToBeEdit}
+                  handleMovieToBeEdit={this.handleMovieToBeEdited}
                 />
               ))
             ) : (
@@ -218,7 +220,8 @@ class Body extends Component {
               onChange={this.handleMovieName}
               //FIRST APPROACH
               // value={this.state.name}
-              value={this.state.newMovieToBeAdded.name}
+              //SECOND APPROACH
+              value={this.state.newMovieToBeAdded.name || ""}
               name="movieName"
               type="text"
             />
@@ -228,7 +231,8 @@ class Body extends Component {
               onChange={this.handleReleaseDate}
               // FIRST APPRAOCH
               // value={this.state.releaseDate}
-              value={this.state.newMovieToBeAdded.releaseDate}
+              //SECOND APPROACH
+              value={this.state.newMovieToBeAdded.releaseDate || ""}
               name="releaseDate"
               type="text"
             />
@@ -238,7 +242,8 @@ class Body extends Component {
               onChange={this.handleMovieDirector}
               //FIRST APPRAOCH
               // value={this.state.director}
-              value={this.state.newMovieToBeAdded.director}
+              //SECOND APPROACH
+              value={this.state.newMovieToBeAdded.director || ""}
               name="director"
               type="text"
             />
