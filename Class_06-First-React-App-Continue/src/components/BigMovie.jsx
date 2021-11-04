@@ -5,7 +5,7 @@ import "./Body.scss";
 
 // }
 
-export default class BigMovie extends Component {
+export default class Movie extends Component {
   render() {
     return (
       <>
@@ -14,6 +14,22 @@ export default class BigMovie extends Component {
             <h2>Movie name: {this.props.movieName} </h2>
             <h4>Release date: {this.props.releaseDate} </h4>
             <h4>Director: {this.props.director}</h4>
+
+            <button onClick={() => this.props.removeMovie(this.props.id)}>
+              Delete Movie
+            </button>
+            <button
+              onClick={() =>
+                this.props.handleMovieToBeEdit(
+                  this.props.id,
+                  this.props.movieName,
+                  this.props.releaseDate,
+                  this.props.director
+                )
+              }
+            >
+              Edit Movie
+            </button>
           </div>
         </div>
       </>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuid } from "uuid"; // Library to generate UNIQUE IDS for us
 // V1 Generates and timestamp
 
-import BigMovie from "./BigMovie";
+import Movie from "./BigMovie";
 import "./Body.scss";
 
 class Body extends Component {
@@ -16,55 +16,175 @@ class Body extends Component {
           name: "Harry Potter and the half blood prince",
           releaseDate: "15 July 2009",
           director: "David Yates",
+          editable: false,
         },
         {
           id: 2,
           name: "The Hobbit: Battle of the five armies",
           releaseDate: "15 Dec 2014",
           director: "Peter Jackson",
+          editable: false,
         },
       ],
 
       name: "",
       releaseDate: "",
       director: "",
+
+      newMovieToBeAdded: {
+        id: "",
+        name: "",
+        releaseDate: "",
+        director: "",
+        editable: false,
+      },
     };
   }
 
   //FIRST APPROACH
+
+  // handleMovieName = (e) => {
+  //   this.setState({
+  //     name: e.target.value,
+  //   });
+  // };
+
+  // handleReleaseDate = (e) => {
+  //   this.setState({
+  //     releaseDate: e.target.value,
+  //   });
+  // };
+
+  // handleMovieDirector = (e) => {
+  //   this.setState({
+  //     director: e.target.value,
+  //   });
+  // };
+
+  //SECOND APPROACH
+
   handleMovieName = (e) => {
     this.setState({
-      name: e.target.value,
+      newMovieToBeAdded: {
+        ...this.state.newMovieToBeAdded,
+        name: e.target.value,
+      },
     });
   };
 
   handleReleaseDate = (e) => {
     this.setState({
-      releaseDate: e.target.value,
+      newMovieToBeAdded: {
+        ...this.state.newMovieToBeAdded,
+        releaseDate: e.target.value,
+      },
     });
   };
 
   handleMovieDirector = (e) => {
+    // this.setState({
+    //   newMovieToBeAdded: {
+    //     ...this.state.newMovieToBeAdded,
+    //     director: e.target.value
+    //   }
+    // });
+
+    this.setState((prevState) => ({
+      newMovieToBeAdded: {
+        ...prevState.newMovieToBeAdded,
+        director: e.target.value,
+      },
+    }));
+  };
+
+  /**
+   * @e => ovoj argument e samiot event od button
+   * TELL NOT WHY
+   */
+
+  handleMovieToAddOrEdit = (e, isThereMovieToEdit) => {
+    e.preventDefault();
+
+    //isThereMovieToEdit === false
+    if (!isThereMovieToEdit) {
+      const newMovie = {
+        id: uuid(),
+        name: this.state.name,
+        releaseDate: this.state.releaseDate,
+        director: this.state.director,
+      };
+
+      console.log(newMovie);
+
+      //FIRST APPROACH
+
+      // this.setState({
+      //   mainMovies: [...this.state.mainMovies, newMovie],
+      // });
+
+      //SECOND APPROACH
+
+      const movieToAdd = { ...this.state.newMovieToBeAdded, id: uuid() };
+
+      this.setState({
+        mainMovies: [...this.state.mainMovies, movieToAdd],
+      });
+    } else {
+      //
+      const movieToEdit = this.state.mainMovies.map((movie) => {
+        if (movie.editable) {
+          movie = { ...this.state.newMovieToBeAdded, editable: false };
+        }
+        return movie;
+      });
+
+      this.setState({
+        mainMovies: movieToEdit,
+        newMovieToBeAdded: {
+          id: "",
+          name: "",
+          releaseDate: "",
+          director: "",
+          editable: false,
+        },
+      });
+    }
+  };
+
+  handleRemoveMovie = (id) => {
+    const updatedMovies = this.state.mainMovies.filter(
+      (movie) => movie.id !== id
+    );
+
     this.setState({
-      director: e.target.value,
+      mainMovies: updatedMovies,
     });
   };
 
-  handleAddNewMovie = (e) => {
-    e.preventDefault();
-
-    const newMovie = {
-      id: uuid(),
-      name: this.state.name,
-      releaseDate: this.state.releaseDate,
-      director: this.state.director,
-    };
-
-    console.log(newMovie);
+  handleMovieToBeEdit = (id, name, releaseDate, director) => {
+    const movieToEdit = this.state.mainMovies.map((movie) => {
+      if (movie.id === id) {
+        movie = { ...movie, editable: true };
+      }
+      return movie;
+    });
 
     this.setState({
-      mainMovies: [...this.state.mainMovies, newMovie],
+      mainMovies: movieToEdit,
     });
+
+    this.setState({
+      newMovieToBeAdded: {
+        id,
+        name,
+        releaseDate,
+        director,
+      },
+    });
+  };
+
+  isThereMovieToEdit = () => {
+    return this.state.mainMovies.some((movie) => movie.editable);
   };
 
   render() {
@@ -73,22 +193,32 @@ class Body extends Component {
         <div>{this.props.children}</div>
         <div className="container">
           <div>
-            <h1>Movie list:</h1>
-            {this.state.mainMovies.map((movie) => (
-              <BigMovie
-                key={movie.id}
-                movieName={movie.name}
-                releaseDate={movie.releaseDate}
-                director={movie.director}
-              />
-            ))}
+            <h1>{!!this.state.mainMovies.length ? "Movie list:" : ""} </h1>
+            {!!this.state.mainMovies.length ? (
+              this.state.mainMovies.map((movie) => (
+                <Movie
+                  key={movie.id}
+                  id={movie.id}
+                  movieName={movie.name}
+                  releaseDate={movie.releaseDate}
+                  director={movie.director}
+                  removeMovie={this.handleRemoveMovie}
+                  //Good practice
+                  handleMovieToBeEdit={this.handleMovieToBeEdit}
+                />
+              ))
+            ) : (
+              <h1>No movies in the list</h1>
+            )}
           </div>
           <div>
             <h1>Add new movie</h1>
             <label htmlFor="movieName">Movie name:</label>
             <input
               onChange={this.handleMovieName}
-              value={this.state.name}
+              //FIRST APPROACH
+              // value={this.state.name}
+              value={this.state.newMovieToBeAdded.name}
               name="movieName"
               type="text"
             />
@@ -96,7 +226,9 @@ class Body extends Component {
             <label htmlFor="releaseDate">Release date:</label>
             <input
               onChange={this.handleReleaseDate}
-              value={this.state.releaseDate}
+              // FIRST APPRAOCH
+              // value={this.state.releaseDate}
+              value={this.state.newMovieToBeAdded.releaseDate}
               name="releaseDate"
               type="text"
             />
@@ -104,14 +236,21 @@ class Body extends Component {
             <label htmlFor="director">Director:</label>
             <input
               onChange={this.handleMovieDirector}
-              value={this.state.director}
+              //FIRST APPRAOCH
+              // value={this.state.director}
+              value={this.state.newMovieToBeAdded.director}
               name="director"
               type="text"
             />
-
-            <button onClick={(e) => this.handleAddNewMovie(e)}>
-              Add Movie
-            </button>
+            {this.isThereMovieToEdit() ? (
+              <button onClick={(e) => this.handleMovieToAddOrEdit(e, true)}>
+                Save Movie
+              </button>
+            ) : (
+              <button onClick={(e) => this.handleMovieToAddOrEdit(e, false)}>
+                Add Movie
+              </button>
+            )}
           </div>
         </div>
       </>
