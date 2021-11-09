@@ -6,6 +6,8 @@ import Header from "./components/header/Header";
 import { Home } from "./components/home/Home";
 import { Products } from "./components/products/Products";
 import { AddProduct } from "./components/add-product/AddProduct";
+import { ProductDetails } from "./components/product-details/ProductDetails";
+import { NotFound } from "./components/NotFound";
 
 // import { Playground } from "./components/playground/Playground";
 
@@ -40,8 +42,12 @@ function App() {
             element={<Products products={products} />}
           />
           <Route path={"/add-product"} element={<AddProduct />} />
+
+          <Route path={"/product/:id"} element={<ProductDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+
       {/* <Playground /> */}
     </>
   );

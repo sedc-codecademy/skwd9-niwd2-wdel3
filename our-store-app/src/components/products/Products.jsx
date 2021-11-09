@@ -1,5 +1,6 @@
 import React from "react";
 import { ProductCard } from "../product-card/ProductCard";
+import "./Products.scss";
 
 export const Products = (props) => {
   console.log(props);

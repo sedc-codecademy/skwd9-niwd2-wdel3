@@ -4,6 +4,7 @@
   padding: 0 5rem;
   align-items: center;
   border-bottom: 1px solid #2364aa;
+  margin-bottom: 2rem;
 
   h1 {
     cursor: pointer;
@@ -25,9 +26,9 @@
         color: darken(#4ecdc4, 20%);
       }
     }
+  }
 
-    a {
-      text-decoration: none;
-    }
+  a {
+    text-decoration: none;
   }
 }
