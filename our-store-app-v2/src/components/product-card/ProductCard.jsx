@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import "./ProductCard.scss";
 
 export const ProductCard = ({ product }) => {
+  // console.log(product.rating);
+
+  const raitingObject = product.rating;
+  const raiting = Object.keys(raitingObject);
+  // console.log(raiting);
   return (
     <div className="product">
       <h3 className="product__info">Product details: </h3>
@@ -18,6 +23,14 @@ export const ProductCard = ({ product }) => {
       <Link to={`/product/${product.id}`}>
         <p>Product details</p>{" "}
       </Link>
+
+      {raiting.map((value, index) => (
+        <div key={index}>
+          <p>
+            {value}: {raitingObject[value]}{" "}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };

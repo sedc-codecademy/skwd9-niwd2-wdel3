@@ -8,6 +8,8 @@ export const AddProduct = (props) => {
     image: "",
     description: "",
     price: "",
+    // DO NOT MIND RAITING
+    rating: {},
   });
 
   const handleProductName = (e) => {

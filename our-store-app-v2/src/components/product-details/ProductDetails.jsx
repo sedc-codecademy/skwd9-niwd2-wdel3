@@ -37,6 +37,7 @@ export const ProductDetails = () => {
 
   useEffect(() => {
     //COMPONENT DID MOUNT
+
     const interval = setInterval(() => {
       console.log("Every 2 seconds");
     }, 2000);

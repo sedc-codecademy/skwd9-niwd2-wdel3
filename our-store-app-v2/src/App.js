@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "./components/header/Header";
@@ -15,6 +10,7 @@ import { ProductDetails } from "./components/product-details/ProductDetails";
 import { NotFound } from "./components/NotFound";
 import { EditProduct } from "./components/edit-product/EditProduct";
 import { CedevitaTest } from "./components/cedevita-test/CedevitaTest";
+import { paginateArray } from "./utils/pagination";
 
 // import { Playground } from "./components/playground/Playground";
 
@@ -22,6 +18,8 @@ import { CedevitaTest } from "./components/cedevita-test/CedevitaTest";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [filteredName, setFilterName] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     console.log("Component did mount");
@@ -36,6 +34,33 @@ function App() {
     setProducts(result);
   };
 
+  const handleFilterName = (e) => {
+    const value = e.target.value;
+    setFilterName(value.trim().toLowerCase());
+  };
+
+  const handlePageNumber = (increment) => {
+    increment ? setPageNumber(pageNumber + 1) : setPageNumber(pageNumber - 1);
+  };
+
+  // const filteredProducts = () => {
+  //   return products.filter((product) =>
+  //     product.title.trim().toLowerCase().includes(filteredName)
+  //   );
+  // };
+
+  // FILTERING WITH PAGINATION
+
+  const filteredProducts = () => {
+    return paginateArray(
+      products.filter((product) =>
+        product.title.trim().toLowerCase().includes(filteredName)
+      ),
+      4,
+      pageNumber
+    );
+  };
+
   return (
     <>
       <Router>
@@ -46,7 +71,15 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route
             path={"/products"}
-            element={<Products products={products} />}
+            element={
+              <Products
+                // products={products}
+                // FILTERED PRODUCTS
+                products={filteredProducts()}
+                handleFilterName={handleFilterName}
+                handlePageNumber={handlePageNumber}
+              />
+            }
           />
 
           <Route
