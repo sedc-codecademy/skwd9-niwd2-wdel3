@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
-import storeContext from "../../store-context/storeContext";
 
-export const AddProduct = () => {
-  const { products, setProducts } = useContext(storeContext);
-
+export const AddProduct = (props) => {
+  const { setProducts, products } = props;
   const [product, addProduct] = useState({
     title: "",
     image: "",

@@ -12,6 +12,7 @@ import { EditProduct } from "./components/edit-product/EditProduct";
 import { CedevitaTest } from "./components/cedevita-test/CedevitaTest";
 import { Cart } from "./components/cart/Cart";
 import { StoreGlobalState } from "./store-context/StoreGlobalContextState";
+import { Playground } from "./components/playground/Playground";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path={"/cart"} element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Playground game={"World of Warcraft"} />
         </Router>
       </StoreGlobalState>
     </>

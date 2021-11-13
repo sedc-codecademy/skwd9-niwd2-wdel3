@@ -1,12 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams, Outlet } from "react-router-dom";
-import storeContext from "../../store-context/storeContext";
 import { ProductCard } from "../product-card/ProductCard";
 
 export const ProductDetails = () => {
   const params = useParams();
-  const { addToCart } = useContext(storeContext);
   const { id } = params;
+  console.log(id);
+
+  // constructor(props){
+  //   super(props)
+
+  //   this.state = {
+  //     product = {}
+  //   }
+  // }
+
+  // this.setState({product: 'new value'})
 
   const [product, setProduct] = useState({
     category: "",
@@ -21,6 +30,7 @@ export const ProductDetails = () => {
   const fetchSingleProduct = async (id) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`); //GET METHOD BY DEFAULT IN JS
     const product = await response.json();
+    console.log("Result: ", product);
 
     setProduct(product);
   };
@@ -49,15 +59,7 @@ export const ProductDetails = () => {
       </Link>
 
       <h1>Product: </h1>
-      {product.title ? (
-        <ProductCard
-          product={product}
-          addToCart={addToCart}
-          showDetails={false}
-        />
-      ) : (
-        <p>Loading...</p>
-      )}
+      {product.title ? <ProductCard product={product} /> : <p>Loading...</p>}
 
       {/* RENDER THE NESTED ROUTE t.e. NESTED COMPONENT HERE */}
       {/* SO OUTLET SPESIFICIRAME DO MESTOTO KADE KE SE RENDERIRA CHILD ILI VGEZDENATA RUTTA */}
